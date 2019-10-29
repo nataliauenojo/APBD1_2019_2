@@ -1,1 +1,1 @@
-# APBD1_2019_2
+# Repositório da AP 2019/02 da disciplina de Banco de Dados 1
