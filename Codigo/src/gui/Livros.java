@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 public class Livros extends javax.swing.JFrame {
@@ -403,29 +404,32 @@ public class Livros extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setMinWidth(50);
         jTable1.getColumnModel().getColumn(0).setMaxWidth(200);
 
-        jTable1.getSelectionModel().addListSelectionListener((ListSelectionEvent event) -> {
-            if (jTable1.getSelectedRow() >= 0) {
-                Object isbn = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
-                Object titulo = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1);
-                Object autor = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2);
-                Object ano = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3);
-                Object preco = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4);
-                Object categoria = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5);
-                txtIsbn.setText(isbn.toString());
-                txtIsbn.setEnabled(false);
-                txtTitulo.setText(titulo.toString());
-                txtAutor.setText(autor.toString());
-                txtAno.setText(ano.toString());
-                txtPreco.setText(preco.toString());
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 
-                CategoriaDAO cat = new CategoriaDAO();
-
-                try {
-                    jcbCat.setSelectedItem(cat.find(categoria.toString()).getNome());
-                } catch (SQLException ex) {
-                    Logger.getLogger(Livros.class.getName()).log(Level.SEVERE, null, ex);
+            public void valueChanged(ListSelectionEvent event) {
+                if (jTable1.getSelectedRow() >= 0) {
+                    Object isbn = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0);
+                    Object titulo = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1);
+                    Object autor = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 2);
+                    Object ano = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 3);
+                    Object preco = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 4);
+                    Object categoria = jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 5);
+                    txtIsbn.setText(isbn.toString());
+                    txtIsbn.setEnabled(false);
+                    txtTitulo.setText(titulo.toString());
+                    txtAutor.setText(autor.toString());
+                    txtAno.setText(ano.toString());
+                    txtPreco.setText(preco.toString());
+                    
+                    CategoriaDAO cat = new CategoriaDAO();
+                    
+                    try {
+                        jcbCat.setSelectedItem(cat.find(categoria.toString()).getNome());
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Livros.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
-
             }
         });
 

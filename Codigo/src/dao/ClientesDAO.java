@@ -85,7 +85,6 @@ public class ClientesDAO extends dao.DbConnection {
             close(conn);
         }
     }
-
 }
 
 /**
