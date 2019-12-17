@@ -476,7 +476,7 @@ public class Livros extends javax.swing.JFrame {
         categoria.stream().filter((p) -> (p.getNome().equals(jcbCat.getSelectedItem().toString()))).forEachOrdered((p) -> {
             prod.setCategoria(p.getNome());
         });
-        prod.setPreco(Double.parseDouble(txtAno.getText()));
+        prod.setPreco(Double.parseDouble(txtPreco.getText()));
         dao.update(prod);
     }
 
